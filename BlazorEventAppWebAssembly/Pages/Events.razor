@@ -12,13 +12,13 @@
 }
 else
 {
-    <QuickGrid Items="events.AsQueryable()" TGridItem="Event" class="table table-striped">
-        <PropertyColumn Property="@(e => e.Name)" Title="Name" class="table-header" />
-        <PropertyColumn Property="@(e => e.Location)" Title="Location" class="table-header" />
-        <PropertyColumn Property="@(e => e.StartDate)" Title="Start Date" class="table-header" />
-        <PropertyColumn Property="@(e => e.EndDate)" Title="End Date" class="table-header" />
-        <PropertyColumn Property="@(e => e.Description)" Title="Description" class="table-header" />
-        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" class="table-header" />
+    <QuickGrid Items="events.AsQueryable()" TGridItem="Event" >
+        <PropertyColumn Property="@(e => e.Name)" Title="Name" Sortable="true"/>
+        <PropertyColumn Property="@(e => e.Location)" Title="Location" Sortable="true"/>
+        <PropertyColumn Property="@(e => e.StartDate)" Title="Start Date" Sortable="true" />
+        <PropertyColumn Property="@(e => e.EndDate)" Title="End Date" Sortable="true" />
+        <PropertyColumn Property="@(e => e.Description)" Title="Description" Sortable="true" />
+        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true" />
     </QuickGrid>
 }
 
