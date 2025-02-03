@@ -43,5 +43,11 @@ namespace BlazorEventAppWebAssembly.Services
             }
             return Task.CompletedTask;
         }
+
+        public Task<Event> GetEventById(int eventId)
+        {
+            var existingEvent = events.FirstOrDefault(e => e.Id == eventId);
+            return Task.FromResult(existingEvent);
+        }   
     }
 }

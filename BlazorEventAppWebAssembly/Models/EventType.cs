@@ -2,9 +2,9 @@
 {
     public enum EventType
     {
-        SPORTS,
-        MUSIC,
-        CONFERENCE,
-        CUlTURAL
+        Sports,
+        Music,
+        Conference,
+        Cultural
     }
 }
