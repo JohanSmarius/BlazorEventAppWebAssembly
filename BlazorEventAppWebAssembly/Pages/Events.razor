@@ -1,0 +1,45 @@
+@page "/events"
+@using BlazorEventAppWebAssembly.Models
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<PageTitle>Events</PageTitle>
+
+<h1>Upcoming Events</h1>
+
+@if (events == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid Items="events">
+        <PropertyColumn Property="@(e => e.Name)" Title="Name" />
+        <PropertyColumn Property="@(e => e.Location)" Title="Location" />
+        <PropertyColumn Property="@(e => e.StartDate)" Title="Start Date" />
+        <PropertyColumn Property="@(e => e.EndDate)" Title="End Date" />
+        <PropertyColumn Property="@(e => e.Description)" Title="Description" />
+        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" />
+    </QuickGrid>
+}
+
+@code {
+    private List<Event>? events;
+
+    protected override void OnInitialized()
+    {
+        events = GetFutureEvents();
+    }
+
+    private List<Event> GetFutureEvents()
+    {
+        var allEvents = new List<Event>
+        {
+            new Event { Id = 1, Name = "Music Concert", Location = "New York", StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(11), Description = "A great music concert.", EventType = EventType.MUSIC },
+            new Event { Id = 2, Name = "Tech Conference", Location = "San Francisco", StartDate = DateTime.Now.AddDays(20), EndDate = DateTime.Now.AddDays(22), Description = "A tech conference.", EventType = EventType.CONFERENCE },
+            new Event { Id = 3, Name = "Sports Event", Location = "Los Angeles", StartDate = DateTime.Now.AddDays(5), EndDate = DateTime.Now.AddDays(6), Description = "A sports event.", EventType = EventType.SPORTS },
+            new Event { Id = 4, Name = "Cultural Festival", Location = "Chicago", StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(16), Description = "A cultural festival.", EventType = EventType.CUlTURAL }
+        };
+
+        return allEvents.Where(e => e.StartDate > DateTime.Now).ToList();
+    }
+}
