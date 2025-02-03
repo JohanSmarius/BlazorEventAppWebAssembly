@@ -8,6 +8,18 @@
 
 <h3>Add a New Event</h3>
 
+@if (validationErrors != null && validationErrors.Any())
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in validationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
 <EditForm Model="@newEvent" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -47,9 +59,20 @@
 
 @code {
     private Event newEvent = new Event();
+    private List<string> validationErrors = new List<string>();
 
     private async Task HandleValidSubmit()
     {
+        var context = new ValidationContext(newEvent);
+        var results = new List<ValidationResult>();
+        validationErrors.Clear();
+
+        if (!Validator.TryValidateObject(newEvent, context, results, true))
+        {
+            validationErrors.AddRange(results.Select(r => r.ErrorMessage));
+            return;
+        }
+
         await EventService.AddEvent(newEvent);
         newEvent = new Event();
         Navigation.NavigateTo("/events");
