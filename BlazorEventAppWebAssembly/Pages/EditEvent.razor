@@ -1,0 +1,94 @@
+@page "/edit-event/{eventId:int}"
+@using BlazorEventAppWebAssembly.Models
+@using BlazorEventAppWebAssembly.Services
+@inject EventService EventService
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@code {
+    [Parameter]
+    public int EventId { get; set; }
+
+    private Event? eventToEdit;
+    private List<string> validationErrors = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventToEdit = await EventService.GetEventById(EventId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var context = new ValidationContext(eventToEdit);
+        var results = new List<ValidationResult>();
+        validationErrors.Clear();
+
+        if (!Validator.TryValidateObject(eventToEdit, context, results, true))
+        {
+            validationErrors.AddRange(results.Select(r => r.ErrorMessage));
+            return;
+        }
+
+        await EventService.UpdateEvent(eventToEdit);
+        Navigation.NavigateTo("/events");
+    }
+}
+
+<PageTitle>Edit Event</PageTitle>
+
+<h3>Edit Event</h3>
+
+@if (eventToEdit == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @if (validationErrors != null && validationErrors.Any())
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in validationErrors)
+                {
+                    <li>@error</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <EditForm Model="@eventToEdit" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="eventToEdit.Name" />
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <InputText id="location" class="form-control" @bind-Value="eventToEdit.Location" />
+        </div>
+        <div class="mb-3">
+            <label for="startDate" class="form-label">Start Date and Time</label>
+            <InputDate id="startDate" class="form-control" @bind-Value="eventToEdit.StartDate" Type="InputDateType.DateTimeLocal" />
+        </div>
+        <div class="mb-3">
+            <label for="endDate" class="form-label">End Date and Time</label>
+            <InputDate id="endDate" class="form-control" @bind-Value="eventToEdit.EndDate" Type="InputDateType.DateTimeLocal" />
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="eventToEdit.Description" />
+        </div>
+        <div class="mb-3">
+            <label for="eventType" class="form-label">Event Type</label>
+            <InputSelect id="eventType" class="form-control" @bind-Value="eventToEdit.EventType">
+                <option value="">Select an event type</option>
+                @foreach (var eventType in Enum.GetValues(typeof(EventType)))
+                {
+                    <option value="@eventType">@eventType</option>
+                }
+            </InputSelect>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Event</button>
+    </EditForm>
+}
