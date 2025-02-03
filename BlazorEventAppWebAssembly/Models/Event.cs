@@ -1,4 +1,6 @@
-﻿namespace BlazorEventAppWebAssembly.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BlazorEventAppWebAssembly.Models
 {
     public class Event : IValidatableObject
     {
