@@ -12,7 +12,7 @@
 }
 else
 {
-    <QuickGrid Items="events">
+    <QuickGrid Items="events.AsQueryable()" TGridItem="Event">
         <PropertyColumn Property="@(e => e.Name)" Title="Name" />
         <PropertyColumn Property="@(e => e.Location)" Title="Location" />
         <PropertyColumn Property="@(e => e.StartDate)" Title="Start Date" />
