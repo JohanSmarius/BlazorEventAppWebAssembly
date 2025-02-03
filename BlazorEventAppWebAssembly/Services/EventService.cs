@@ -18,5 +18,30 @@ namespace BlazorEventAppWebAssembly.Services
             events.Add(newEvent);
             return Task.CompletedTask;
         }
+
+        public Task UpdateEvent(Event updatedEvent)
+        {
+            var existingEvent = events.FirstOrDefault(e => e.Id == updatedEvent.Id);
+            if (existingEvent != null)
+            {
+                existingEvent.Name = updatedEvent.Name;
+                existingEvent.Location = updatedEvent.Location;
+                existingEvent.StartDate = updatedEvent.StartDate;
+                existingEvent.EndDate = updatedEvent.EndDate;
+                existingEvent.Description = updatedEvent.Description;
+                existingEvent.EventType = updatedEvent.EventType;
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteEvent(int eventId)
+        {
+            var eventToDelete = events.FirstOrDefault(e => e.Id == eventId);
+            if (eventToDelete != null)
+            {
+                events.Remove(eventToDelete);
+            }
+            return Task.CompletedTask;
+        }
     }
 }
