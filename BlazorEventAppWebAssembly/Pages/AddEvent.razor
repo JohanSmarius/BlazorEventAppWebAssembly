@@ -2,6 +2,7 @@
 @using BlazorEventAppWebAssembly.Models
 @using BlazorEventAppWebAssembly.Services
 @inject EventService EventService
+@inject NavigationManager Navigation
 
 <PageTitle>Add Event</PageTitle>
 
@@ -21,11 +22,11 @@
     </div>
     <div class="mb-3">
         <label for="startDate" class="form-label">Start Date and Time</label>
-        <InputDateTime id="startDate" class="form-control" @bind-Value="newEvent.StartDate" />
+        <InputDate id="startDate" class="form-control" @bind-Value="newEvent.StartDate" Type="InputDateType.DateTimeLocal" />
     </div>
     <div class="mb-3">
         <label for="endDate" class="form-label">End Date and Time</label>
-        <InputDateTime id="endDate" class="form-control" @bind-Value="newEvent.EndDate" />
+        <InputDate id="endDate" class="form-control" @bind-Value="newEvent.EndDate" Type="InputDateType.DateTimeLocal" />
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
@@ -51,5 +52,6 @@
     {
         await EventService.AddEvent(newEvent);
         newEvent = new Event();
+        Navigation.NavigateTo("/events");
     }
 }
