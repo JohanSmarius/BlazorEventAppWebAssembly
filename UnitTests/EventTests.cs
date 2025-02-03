@@ -14,6 +14,8 @@ namespace UnitTests
             // Arrange
             var eventInstance = new Event
             {
+                Name = "Some dummy name",
+                Location = "Some dummy location to validate",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddHours(-1)
             };
@@ -33,6 +35,8 @@ namespace UnitTests
             // Arrange
             var eventInstance = new Event
             {
+                Name = "Some dummy name",
+                Location = "Some dummy location to validate",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddHours(1)
             };
@@ -52,6 +56,8 @@ namespace UnitTests
             // Arrange
             var eventInstance = new Event
             {
+                Name = "Some dummy name",
+                Location = "Some dummy location to validate",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddHours(3)
             };
