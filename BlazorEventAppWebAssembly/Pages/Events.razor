@@ -20,8 +20,8 @@ else
     <QuickGrid Items="events.AsQueryable()" TGridItem="Event" >
         <PropertyColumn Property="@(e => e.Name)" Title="Name" Sortable="true"/>
         <PropertyColumn Property="@(e => e.Location)" Title="Location" Sortable="true"/>
-        <PropertyColumn Property="@(e => e.StartDate)" Title="Start Date" Sortable="true" />
-        <PropertyColumn Property="@(e => e.EndDate)" Title="End Date" Sortable="true" />
+        <PropertyColumn Property="@(e => e.StartDate.ToString("g"))" Title="Start Date" Sortable="true" />
+        <PropertyColumn Property="@(e => e.EndDate.ToString("g"))" Title="End Date" Sortable="true" />
         <PropertyColumn Property="@(e => e.Description)" Title="Description" Sortable="true" />
         <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true" />
     </QuickGrid>
