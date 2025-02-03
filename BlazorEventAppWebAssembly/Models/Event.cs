@@ -6,8 +6,12 @@ namespace BlazorEventAppWebAssembly.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        [MinLength(3)]
         public string Name { get; set; }
 
+        [Required]
+        [MinLength(20)]
         public string Location { get; set; }
 
         public DateTime StartDate { get; set; }

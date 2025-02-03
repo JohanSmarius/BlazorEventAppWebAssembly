@@ -44,17 +44,6 @@
 }
 else
 {
-    @if (validationErrors != null && validationErrors.Any())
-    {
-        <div class="alert alert-danger">
-            <ul>
-                @foreach (var error in validationErrors)
-                {
-                    <li>@error</li>
-                }
-            </ul>
-        </div>
-    }
 
     <EditForm Model="@eventToEdit" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />

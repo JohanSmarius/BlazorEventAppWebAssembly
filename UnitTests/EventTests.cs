@@ -64,5 +64,90 @@ namespace UnitTests
             // Assert
             Assert.Empty(validationResults);
         }
+
+        [Fact]
+        public void Validate_NameIsRequired_ReturnsValidationError()
+        {
+            // Arrange
+            var eventInstance = new Event
+            {
+                Name = null,
+                Location = "A valid location with more than 20 characters",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddHours(3)
+            };
+
+            // Act
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(eventInstance);
+            Validator.TryValidateObject(eventInstance, validationContext, validationResults, true);
+
+            // Assert
+            Assert.Contains(validationResults, v => v.ErrorMessage == "The Name field is required.");
+        }
+
+        [Fact]
+        public void Validate_NameMinLength_ReturnsValidationError()
+        {
+            // Arrange
+            var eventInstance = new Event
+            {
+                Name = "AB",
+                Location = "A valid location with more than 20 characters",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddHours(3)
+            };
+
+            // Act
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(eventInstance);
+            Validator.TryValidateObject(eventInstance, validationContext, validationResults, true);
+
+            // Assert
+            Assert.Contains(validationResults, v => v.ErrorMessage == "The field Name must be a string or array type with a minimum length of '3'.");
+        }
+
+        [Fact]
+        public void Validate_LocationIsRequired_ReturnsValidationError()
+        {
+            // Arrange
+            var eventInstance = new Event
+            {
+                Name = "Valid Name",
+                Location = null,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddHours(3)
+            };
+
+            // Act
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(eventInstance);
+            Validator.TryValidateObject(eventInstance, validationContext, validationResults, true);
+
+            // Assert
+            Assert.Contains(validationResults, v => v.ErrorMessage == "The Location field is required.");
+        }
+
+        [Fact]
+        public void Validate_LocationMinLength_ReturnsValidationError()
+        {
+            // Arrange
+            var eventInstance = new Event
+            {
+                Name = "Valid Name",
+                Location = "Short location",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddHours(3)
+            };
+
+            // Act
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(eventInstance);
+            Validator.TryValidateObject(eventInstance, validationContext, validationResults, true);
+
+            // Assert
+            Assert.Contains(validationResults, v => v.ErrorMessage == "The field Location must be a string or array type with a minimum length of '20'.");
+        }
+
     }
 }
