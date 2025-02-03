@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorEventAppWebAssembly", "BlazorEventAppWebAssembly\BlazorEventAppWebAssembly.csproj", "{D2FA13FF-58BE-48A8-A8BC-2F28098DAEC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{4A42867B-172B-4C7A-9664-29787EA2652B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D2FA13FF-58BE-48A8-A8BC-2F28098DAEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2FA13FF-58BE-48A8-A8BC-2F28098DAEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2FA13FF-58BE-48A8-A8BC-2F28098DAEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A42867B-172B-4C7A-9664-29787EA2652B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A42867B-172B-4C7A-9664-29787EA2652B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A42867B-172B-4C7A-9664-29787EA2652B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A42867B-172B-4C7A-9664-29787EA2652B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
