@@ -79,6 +79,10 @@ else
                 }
             </InputSelect>
         </div>
+        <div class="mb-3">
+            <label for="isConfirmed" class="form-label">Confirmed</label>
+            <InputCheckbox id="isConfirmed" class="form-check-input" @bind-Value="eventToEdit.IsConfirmed" disabled />
+        </div>
         <button type="submit" class="btn btn-primary">Update Event</button>
     </EditForm>
 }
