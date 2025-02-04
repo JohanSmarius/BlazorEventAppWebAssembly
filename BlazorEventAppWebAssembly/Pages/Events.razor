@@ -19,14 +19,14 @@
 else
 {
     <QuickGrid Items="events.AsQueryable()" TGridItem="Models.Event">
-        <PropertyColumn Property="@(e => e.Name)" Title="Name" Sortable="true"/>
-        <PropertyColumn Property="@(e => e.Location)" Title="Location" Sortable="true"/>
-        <PropertyColumn Property="@(e => e.StartDate.ToString("g"))" Title="Start Date" Sortable="true" />
-        <PropertyColumn Property="@(e => e.EndDate.ToString("g"))" Title="End Date" Sortable="true" />
-        <PropertyColumn Property="@(e => e.Description)" Title="Description" Sortable="true" />
-        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true" />
-        <PropertyColumn Property="@(e => e.IsConfirmed ? "Confirmed" : "Not Confirmed")" Title="Status" Sortable="true" />
-        <TemplateColumn Title="Actions">
+        <PropertyColumn Property="@(e => e.Name)" Title="Name" Sortable="true" DataTestId="name-column"/>
+        <PropertyColumn Property="@(e => e.Location)" Title="Location" Sortable="true" DataTestId="location-column"/>
+        <PropertyColumn Property="@(e => e.StartDate.ToString("g"))" Title="Start Date" Sortable="true" DataTestId="startdate-column"/>
+        <PropertyColumn Property="@(e => e.EndDate.ToString("g"))" Title="End Date" Sortable="true" DataTestId="enddate-column"/>
+        <PropertyColumn Property="@(e => e.Description)" Title="Description" Sortable="true" DataTestId="description-column"/>
+        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true" DataTestId="eventtype-column"/>
+        <PropertyColumn Property="@(e => e.IsConfirmed ? "Confirmed" : "Not Confirmed")" Title="Status" Sortable="true" DataTestId="status-column"/>
+        <TemplateColumn Title="Actions" DataTestId="actions-column">
             <div class="btn-group">
                 <button class="btn btn-secondary" @onclick="() => NavigateToEditEvent(context)">Edit</button>
                 <button class="btn btn-danger" @onclick="() => ConfirmDeleteEvent(context)">Delete</button>
