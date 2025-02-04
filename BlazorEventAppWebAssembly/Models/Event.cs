@@ -22,6 +22,8 @@ namespace BlazorEventAppWebAssembly.Models
 
         public EventType EventType { get; set; }
 
+        public bool IsConfirmed { get; set; } // P32d3
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errors = new List<ValidationResult>();

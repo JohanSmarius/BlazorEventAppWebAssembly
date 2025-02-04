@@ -30,6 +30,7 @@ namespace BlazorEventAppWebAssembly.Services
                 existingEvent.EndDate = updatedEvent.EndDate;
                 existingEvent.Description = updatedEvent.Description;
                 existingEvent.EventType = updatedEvent.EventType;
+                existingEvent.IsConfirmed = updatedEvent.IsConfirmed;
             }
             return Task.CompletedTask;
         }
@@ -48,6 +49,26 @@ namespace BlazorEventAppWebAssembly.Services
         {
             var existingEvent = events.FirstOrDefault(e => e.Id == eventId);
             return Task.FromResult(existingEvent);
-        }   
+        }
+
+        public Task ConfirmEvent(int eventId) // P59fe
+        {
+            var existingEvent = events.FirstOrDefault(e => e.Id == eventId);
+            if (existingEvent != null)
+            {
+                existingEvent.IsConfirmed = true;
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task UnconfirmEvent(int eventId) // P357b
+        {
+            var existingEvent = events.FirstOrDefault(e => e.Id == eventId);
+            if (existingEvent != null)
+            {
+                existingEvent.IsConfirmed = false;
+            }
+            return Task.CompletedTask;
+        }
     }
 }

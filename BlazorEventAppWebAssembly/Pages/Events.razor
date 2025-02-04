@@ -25,10 +25,12 @@ else
         <PropertyColumn Property="@(e => e.EndDate.ToString("g"))" Title="End Date" Sortable="true" />
         <PropertyColumn Property="@(e => e.Description)" Title="Description" Sortable="true" />
         <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true" />
+        <PropertyColumn Property="@(e => e.IsConfirmed ? "Confirmed" : "Not Confirmed")" Title="Status" Sortable="true" />
         <TemplateColumn Title="Actions">
             <div class="btn-group">
                 <button class="btn btn-secondary" @onclick="() => NavigateToEditEvent(context)">Edit</button>
                 <button class="btn btn-danger" @onclick="() => ConfirmDeleteEvent(context)">Delete</button>
+                <button class="btn btn-success" @onclick="() => ConfirmEvent(context)" disabled="@context.IsConfirmed">Confirm</button>
             </div>
         </TemplateColumn>
     </QuickGrid>
@@ -57,5 +59,11 @@ else
             await EventService.DeleteEvent(selectedEvent.Id);
             events = await EventService.GetFutureEvents();
         }
+    }
+
+    private async Task ConfirmEvent(Event selectedEvent)
+    {
+        await EventService.ConfirmEvent(selectedEvent.Id);
+        events = await EventService.GetFutureEvents();
     }
 }
