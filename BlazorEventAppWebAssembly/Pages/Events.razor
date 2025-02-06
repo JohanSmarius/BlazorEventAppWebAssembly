@@ -5,6 +5,7 @@
 
 @inject EventService EventService
 @inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Events</PageTitle>
 
@@ -19,13 +20,13 @@
 else
 {
     <QuickGrid Items="events.AsQueryable()" TGridItem="Models.Event">
-        <PropertyColumn Property="@(e => e.Name)" Title="Name" Sortable="true"/>
-        <PropertyColumn Property="@(e => e.Location)" Title="Location" Sortable="true"/>
+        <PropertyColumn Property="@(e => e.Name)" Title="Name" Sortable="true" />
+        <PropertyColumn Property="@(e => e.Location)" Title="Location" Sortable="true" />
         <PropertyColumn Property="@(e => e.StartDate.ToString("g"))" Title="Start Date" Sortable="true" />
         <PropertyColumn Property="@(e => e.EndDate.ToString("g"))" Title="End Date" Sortable="true" />
         <PropertyColumn Property="@(e => e.Description)" Title="Description" Sortable="true" />
-        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true" />
-        <PropertyColumn Property="@(e => e.IsConfirmed ? "Confirmed" : "Not Confirmed")" Title="Status" Sortable="true" />
+        <PropertyColumn Property="@(e => e.EventType)" Title="Event Type" Sortable="true"/>
+        <PropertyColumn Property="@(e => e.IsConfirmed ? "Confirmed" : "Not Confirmed")" Title="Status" Sortable="true"/>
         <TemplateColumn Title="Actions">
             <div class="btn-group">
                 <button class="btn btn-secondary" @onclick="() => NavigateToEditEvent(context)">Edit</button>
@@ -51,14 +52,14 @@ else
         Navigation.NavigateTo($"/edit-event/{selectedEvent.Id}");
     }
 
-    private async Task ConfirmDeleteEvent(Event selectedEvent)
-    {
-//        var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this event?");
-//        if (confirmed)
-        {
-            await EventService.DeleteEvent(selectedEvent.Id);
-            events = await EventService.GetFutureEvents();
-        }
+    private async Task ConfirmDeleteEvent(Event selectedEvent)  
+    {  
+       var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[] { "Are you sure you want to delete this event?" });  
+       if (confirmed)  
+       {  
+           await EventService.DeleteEvent(selectedEvent.Id);  
+           events = await EventService.GetFutureEvents();  
+       }  
     }
 
     private async Task ConfirmEvent(Event selectedEvent)
