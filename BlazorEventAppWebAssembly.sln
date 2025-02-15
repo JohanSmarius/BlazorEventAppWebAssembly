@@ -11,7 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITests", "UITests\UITests.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{859673A4-54B5-4A92-8C29-91310ECC8B0D}"
 	ProjectSection(SolutionItems) = preProject
+		chrome.runsettings = chrome.runsettings
+		firefox.runsettings = firefox.runsettings
+		edge.runsettings = edge.runsettings
 		global.json = global.json
+		webkit.runsettings = webkit.runsettings
 	EndProjectSection
 EndProject
 Global
